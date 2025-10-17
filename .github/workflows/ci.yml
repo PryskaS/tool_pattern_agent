@@ -1,0 +1,45 @@
+# File: .github/workflows/ci.yml
+name: Code Quality and Tests
+
+# This workflow runs on every push to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up a specific version of Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Step 3: Install dependencies from our requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+
+      # Step 4: Lint the code with Ruff for style and quality checks
+      - name: Lint with Ruff
+        run: |
+          ruff check .
+
+      # Step 5: Run the unit tests with Pytest
+      - name: Test with Pytest
+        # Add this 'env' block to inject the secret
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          pytest

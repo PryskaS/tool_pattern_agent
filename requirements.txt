@@ -1,0 +1,9 @@
+# Core Application Dependencies
+fastapi[all]
+openai
+python-dotenv
+
+# Testing & Quality Dependencies
+pytest
+pytest-mock
+ruff
