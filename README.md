@@ -29,16 +29,16 @@ This project builds upon the engineering foundation of the previous service, pro
 
 ```mermaid
 graph TD
-    A[User] -->|HTTP Request| B(FastAPI Service);
-    B -->|prompt| C{ToolAgent};
-    C -->|1. Which tool to use? (Router Call)| D[OpenAI API];
-    D -->|Action JSON| C;
-    C -->|2. Execute Tool| E(Search Tool);
-    E -->|Search Result| C;
-    C -->|3. Synthesize answer (Synthesizer Call)| D;
-    D -->|Final Answer| C;
-    C -->|Complete Response| B;
-    B -->|JSON Response| A;
+    A["User"] -->|"HTTP Request"| B("FastAPI Service");
+    B -->|"prompt"| C{"ToolAgent"};
+    C -->|"1. Which tool to use? (Router Call)"| D["OpenAI API"];
+    D -->|"Action JSON"| C;
+    C -->|"2. Execute Tool"| E("Search Tool");
+    E -->|"Search Result"| C;
+    C -->|"3. Synthesize answer (Synthesizer Call)"| D;
+    D -->|"Final Answer"| C;
+    C -->|"Complete Response"| B;
+    B -->|"JSON Response"| A;
 ```
 
 ## 🏁 Getting Started
